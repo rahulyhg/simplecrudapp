@@ -17,7 +17,6 @@ class Cart{
     }
 
     function create(){
- 
         // query to insert record
         $query = "INSERT INTO
                     " . $this->table_name . "
@@ -44,7 +43,6 @@ class Cart{
     }
 
     function show(){
-    
         // query to read single record
         $query = "SELECT
                     c.id, c.product_id, p.name, p.price, c.quantity
@@ -69,7 +67,6 @@ class Cart{
     }
 
     function update(){
-    
         // update query
         $query = "UPDATE
                     " . $this->table_name . "
@@ -92,7 +89,24 @@ class Cart{
         if($stmt->execute()){
             return true;
         }
+        return false;
+    }
+
+    function delete(){
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . "
+            WHERE id=:id ";
     
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+    
+        // bind id of record to delete
+        $stmt->bindParam(":id", $this->id);
+    
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
         return false;
     }
 }
