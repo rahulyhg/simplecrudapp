@@ -37,13 +37,14 @@ class Product{
     
         // query to read single record
         $query = "SELECT
-                    id, name, description, price
+                    p.id, p.name, p.description, p.price, pimg.id as img_id, pimg.image_filename
                 FROM
-                    " . $this->table_name . "
+                    " . $this->table_name . " p
+                LEFT JOIN
+                    product_image pimg
+                        ON p.id = pimg.product_id
                 WHERE
-                    id=:id
-                LIMIT
-                    0,1";
+                    p.id=:id ";
     
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -53,14 +54,7 @@ class Product{
     
         // execute query
         $stmt->execute();
-    
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        // set values to object properties
-        $this->id = $row['id'];
-        $this->name = $row['name'];
-        $this->price = $row['price'];
-        $this->description = $row['description'];
+
+        return $stmt;
     }
 }

@@ -21,29 +21,39 @@ $product = new Product($db);
 $product->id = isset($_GET['id']) ? $_GET['id'] : die();
  
 // read the details of product to be edited
-$product->show();
+$stmt = $product->show();
+$num = $stmt->rowCount();
  
-if($product->name!=null){
-    // create array
-    $product_arr = array(
-        "id" =>  $product->id,
-        "name" => $product->name,
-        "description" => $product->description,
-        "price" => $product->price,
-    );
- 
+// check if more than 0 record found
+if($num>0){
+    $image_arr=array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
+        // create array
+        $image_item = array(
+            "id" =>  $img_id,
+            "filename" => $image_filename
+        );
+        array_push($image_arr, $image_item);
+        $product_item = array(
+            "id" =>  $id,
+            "name" => $name,
+            "description" => $description,
+            "price" => $price,
+            "images" => $image_arr
+        );
+    }
     // set response code - 200 OK
     http_response_code(200);
- 
+    
     // make it json format
     echo json_encode(
         array(
             "error" => false,
-            "value" => $product_arr
+            "value" => $product_item
         )
     );
 }
- 
 else{
     // set response code - 404 Not found
     http_response_code(404);
