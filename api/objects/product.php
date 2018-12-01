@@ -32,4 +32,35 @@ class Product{
     
         return $stmt;
     }
+
+    function show(){
+    
+        // query to read single record
+        $query = "SELECT
+                    id, name, description, price
+                FROM
+                    " . $this->table_name . "
+                WHERE
+                    id=:id
+                LIMIT
+                    0,1";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // bind id of product to be updated
+        $stmt->bindParam(":id", $this->id);
+    
+        // execute query
+        $stmt->execute();
+    
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->name = $row['name'];
+        $this->price = $row['price'];
+        $this->description = $row['description'];
+    }
 }
