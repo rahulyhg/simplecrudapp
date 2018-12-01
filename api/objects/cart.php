@@ -15,6 +15,33 @@ class Cart{
         $this->conn = $db;
     }
 
+    function create(){
+ 
+        // query to insert record
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    user_id=:user_id, product_id=:product_id, quantity=:quantity";
+     
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+     
+        // sanitize
+        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->product_id=htmlspecialchars(strip_tags($this->product_id));
+        $this->quantity=htmlspecialchars(strip_tags($this->quantity));
+     
+        // bind values
+        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":product_id", $this->product_id);
+        $stmt->bindParam(":quantity", $this->quantity);
+        
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
     function show(){
     
         // query to read single record
