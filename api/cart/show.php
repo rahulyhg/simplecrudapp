@@ -30,6 +30,7 @@ if($num>0){
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
         $cart_item = array(
+            "id" => $id,
             "product_id" => $product_id,
             "name" => $name,
             "price" => $price,

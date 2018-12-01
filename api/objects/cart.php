@@ -6,6 +6,7 @@ class Cart{
     private $table_name = "cart";
  
     // object properties
+    public $id;
     public $user_id;
     public $product_id;
     public $quantity;
@@ -46,7 +47,7 @@ class Cart{
     
         // query to read single record
         $query = "SELECT
-                    c.product_id, p.name, p.price, c.quantity
+                    c.id, c.product_id, p.name, p.price, c.quantity
                 FROM
                     " . $this->table_name . " c
                 LEFT JOIN
@@ -65,5 +66,33 @@ class Cart{
         $stmt->execute();
 
         return $stmt;
+    }
+
+    function update(){
+    
+        // update query
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET
+                    quantity=:quantity
+                WHERE
+                    id=:id";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // sanitize
+        $this->quantity=htmlspecialchars(strip_tags($this->quantity));
+    
+        // bind new values
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':quantity', $this->quantity);
+    
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
     }
 }
