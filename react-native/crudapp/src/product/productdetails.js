@@ -33,7 +33,7 @@ export default class ProductDetails extends Component {
     getProductShowApi() {
         var productId = this.props.navigation.getParam('productId')
         // alert(productId)
-        fetch(`http://appfes.com/simplecrudapp/api/product/show?id=${productId}`, {
+        fetch(`http://10.111.240.96/simplecrudapp/api/product/show?id=${productId}`, {
             method : 'GET',
         })
         .then((response) => {

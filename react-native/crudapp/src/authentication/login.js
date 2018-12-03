@@ -23,7 +23,7 @@ export default class Login extends Component{
     }
 
     postLoginApi() {
-        fetch('http://appfes.com/simplecrudapp/api/user/login', {
+        fetch('http://10.111.240.96/simplecrudapp/api/user/login', {
             method : 'POST',
             headers: {
                 'Content-type' : 'application/json',

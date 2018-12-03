@@ -57,7 +57,7 @@ export default class ProductList extends Component {
     }
 
     getProductListApi() {
-        fetch('http://appfes.com/simplecrudapp/api/product/list', {
+        fetch('http://10.111.240.96/simplecrudapp/api/product/list', {
             method : 'GET',
         })
         .then((response) => {

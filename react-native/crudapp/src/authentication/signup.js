@@ -25,7 +25,7 @@ export default class SignUp extends Component{
     postSignupApi() {
         const { username, password, confirmpassword } = this.state
         if(password == confirmpassword) {
-            fetch('http://appfes.com/simplecrudapp/api/user/signup', {
+            fetch('http://10.111.240.96/simplecrudapp/api/user/signup', {
                 method : 'POST',
                 headers: {
                     'Content-type' : 'application/json',
