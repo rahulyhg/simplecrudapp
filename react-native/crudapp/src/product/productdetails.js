@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, Text, View, Image, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { AsyncStorage, Dimensions, StyleSheet, Text, View, Image, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
 import { Container, Content, Footer, Button, Icon } from 'native-base';
 
 import ImageSlider from 'react-native-image-slider';
@@ -60,6 +60,36 @@ export default class ProductDetails extends Component {
         .done();
     }
 
+    addCartApi() {
+        var productId = this.props.navigation.getParam('productId')
+        AsyncStorage.getItem("@userid").then((value) => {
+            // alert(productId + ', ' + value)
+            fetch('http://10.111.240.96/simplecrudapp/api/cart/create', {
+                method : 'POST',
+                headers: {
+                    'Content-type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    'user_id': value,
+                    'product_id': productId,
+                    'quantity': 1
+                })
+            })
+            .then((response) => {
+                response.json()
+                .then((responseJson) => {
+                    if(response.status === 201) {
+                        alert(responseJson.message)
+                    }
+                    else {
+                        alert(responseJson.message)
+                    }
+                })
+            })
+            .done();
+        });
+    }
+
     render() {
 
         return (
@@ -107,7 +137,7 @@ export default class ProductDetails extends Component {
                     </View>
                 </Content>
                 <Footer style={{borderTopWidth: 0, backgroundColor: '#fff'}}>
-                    <Button block info style={{width: width-20}}>
+                    <Button block info style={{width: width-20}} onPress={()=> this.addCartApi()}>
                         <Text>Buy Now</Text>
                     </Button>
                 </Footer>

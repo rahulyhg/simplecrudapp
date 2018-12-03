@@ -11,9 +11,9 @@ export default class Loading extends Component {
 
     async getUser() {
         try {
-            const username = await AsyncStorage.getItem('@username')
-            // alert(token)
-            if(username == null) {
+            const userid = await AsyncStorage.getItem('@userid')
+            // alert(userid)
+            if(userid == null) {
                 this.resetNavigation('StackAuth', 'Login')
             }
             else {

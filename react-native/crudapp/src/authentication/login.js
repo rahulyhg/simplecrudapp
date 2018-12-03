@@ -15,7 +15,7 @@ export default class Login extends Component{
 
     async saveUser(key, value) {
         try {
-          await AsyncStorage.setItem(key, value);
+          await AsyncStorage.setItem(key, `${value}`);
         } catch (error) {
             alert(error)
           console.log('AsyncStorage Error: ' + error.message);
@@ -37,7 +37,7 @@ export default class Login extends Component{
             response.json()
             .then((responseJson) => {
                 if(response.status === 200) {
-                    this.saveUser("@username", responseJson.user.username)
+                    this.saveUser("@userid", responseJson.user.id)
                     this.resetNavigation()
                 }
                 else {

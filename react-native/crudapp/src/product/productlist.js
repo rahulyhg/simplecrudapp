@@ -77,7 +77,7 @@ export default class ProductList extends Component {
     }
 
     removeUser() {
-        AsyncStorage.removeItem('@username');
+        AsyncStorage.removeItem('@userid');
     }
 
     render() {
