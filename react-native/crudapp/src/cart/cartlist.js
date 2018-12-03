@@ -43,6 +43,28 @@ export default class CartList extends Component {
         })
     }
 
+    deleteCartApi(cartId) {
+        fetch('http://10.111.240.96/simplecrudapp/api/cart/delete', {
+            method : 'DELETE',
+            headers: {
+                'Content-type' : 'application/json',
+            },
+            body: JSON.stringify({
+                'id': cartId
+            })
+        })
+        .then((response) => {
+            response.json()
+            .then((responseJson) => {
+                alert(responseJson.message)
+                if(response.status === 202) {
+                    this.getCartApi()
+                }
+            })
+        })
+        .done();
+    }
+
     render() {
         return (
             <Container>
@@ -71,7 +93,7 @@ export default class CartList extends Component {
                                 </View>
                             </Body>
                             <Right>
-                                <Button transparent>
+                                <Button transparent onPress={()=>this.deleteCartApi(item.id)}>
                                     <Icon active name='ios-trash' style={{color: 'red', fontSize: 30}}/>
                                 </Button>
                             </Right>

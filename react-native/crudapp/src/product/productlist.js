@@ -13,6 +13,7 @@ export default class ProductList extends Component {
             headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
             headerRight: (
                 <TouchableOpacity onPress={() => {
+                    AsyncStorage.clear();
                     Alert.alert(
                         'Alert',
                         'Are you sure you want to log out?',
@@ -52,10 +53,6 @@ export default class ProductList extends Component {
         this.getProductListApi()
     }
 
-    componentDidMount() {
-        this.props.navigation.setParams({ handleUser: this.removeUser });
-    }
-
     getProductListApi() {
         fetch('http://10.111.240.96/simplecrudapp/api/product/list', {
             method : 'GET',
@@ -75,11 +72,7 @@ export default class ProductList extends Component {
         })
         .done();
     }
-
-    removeUser() {
-        AsyncStorage.removeItem('@userid');
-    }
-
+    
     render() {
         return (
             <Container>
