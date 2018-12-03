@@ -6,6 +6,7 @@ import LoginScreen from './src/authentication/login'
 import SignupScreen from './src/authentication/signup'
 
 import ProductListScreen from './src/product/productlist'
+import ProductDetailsScreen from './src/product/productdetails'
 
 const StackAuth = createStackNavigator(
   {
@@ -20,6 +21,7 @@ const StackAuth = createStackNavigator(
 const StackProduct = createStackNavigator(
   {
     ProductList: ProductListScreen,
+    ProductDetails: ProductDetailsScreen
   },
   // { 
   //   headerMode: 'none',

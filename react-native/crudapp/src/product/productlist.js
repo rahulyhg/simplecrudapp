@@ -1,20 +1,43 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, Image, Dimensions, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { AsyncStorage, Text, Image, Dimensions, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Container, Content, Card, CardItem, Icon, Body } from 'native-base';
 import { StackActions, NavigationActions } from 'react-navigation';
 
 const width = Dimensions.get('window').width
 
-
 export default class ProductList extends Component {
-    static goTo = this;
 
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Hot Products',
             headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
             headerRight: (
-                <TouchableOpacity onPress={navigation.getParam('handleUser')}>
+                <TouchableOpacity onPress={() => {
+                    Alert.alert(
+                        'Alert',
+                        'Are you sure you want to log out?',
+                        [
+                          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                          {text: 'OK', onPress: () => {
+                            navigation.getParam('handleUser')
+                            const resetAction = StackActions.reset({
+                                index: 0, // Reset nav stack
+                                key: null,
+                                actions: [
+                                    NavigationActions.navigate({
+                                        routeName: 'StackAuth', // Call home stack
+                                        action: NavigationActions.navigate({
+                                            routeName: 'Login',
+                                        }),
+                                    }),
+                                ],
+                            })
+                            navigation.dispatch(resetAction)
+                          }},
+                        ],
+                        { cancelable: false }
+                    )
+                }}>
                     <Icon active name='ios-log-out' style={{marginRight: 10}} />
                 </TouchableOpacity>
             )
@@ -31,7 +54,7 @@ export default class ProductList extends Component {
 
     componentDidMount() {
         this.props.navigation.setParams({ handleUser: this.removeUser });
-      }
+    }
 
     getProductListApi() {
         fetch('http://appfes.com/simplecrudapp/api/product/list', {
@@ -55,19 +78,6 @@ export default class ProductList extends Component {
 
     removeUser() {
         AsyncStorage.removeItem('@username');
-        // const resetAction = StackActions.reset({
-        //     index: 0, // Reset nav stack
-        //     key: null,
-        //     actions: [
-        //         NavigationActions.navigate({
-        //             routeName: 'StackAuth', // Call home stack
-        //             action: NavigationActions.navigate({
-        //                 routeName: 'Login',
-        //             }),
-        //         }),
-        //     ],
-        // })
-        // this.props.navigation.dispatch(resetAction);
     }
 
     render() {
@@ -79,7 +89,7 @@ export default class ProductList extends Component {
                         data={this.state.data}
                         renderItem={({ item }) => (
                             <Card style={styles.card}>
-                                <CardItem cardBody style= {{alignSelf:'center'}} button onPress={() => alert('Coming soon.')}>
+                                <CardItem cardBody style= {{alignSelf:'center'}} button onPress={() => this.props.navigation.navigate('ProductDetails',{productId: item.id})}>
                                     <Image source={{uri: 'http://10.111.240.96/simplecrudapp/product/images/iphonexsmax1.jpeg'}}
                                     style={{height: 150, width: 150, }}/>
                                 </CardItem>
