@@ -8,6 +8,8 @@ import SignupScreen from './src/authentication/signup'
 import ProductListScreen from './src/product/productlist'
 import ProductDetailsScreen from './src/product/productdetails'
 
+import CartListScreen from './src/cart/cartlist'
+
 const StackAuth = createStackNavigator(
   {
     Login: LoginScreen,
@@ -21,7 +23,8 @@ const StackAuth = createStackNavigator(
 const StackProduct = createStackNavigator(
   {
     ProductList: ProductListScreen,
-    ProductDetails: ProductDetailsScreen
+    ProductDetails: ProductDetailsScreen,
+    CartList: CartListScreen
   },
   // { 
   //   headerMode: 'none',

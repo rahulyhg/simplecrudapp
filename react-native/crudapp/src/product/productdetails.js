@@ -11,7 +11,7 @@ export default class ProductDetails extends Component {
         return {
             headerRight: (
                 <TouchableOpacity onPress={() => {
-                    alert("Checkout Now")
+                    navigation.navigate('CartList')
                 }}>
                     <Icon active name='ios-cart' style={{marginRight: 10}} />
                 </TouchableOpacity>
