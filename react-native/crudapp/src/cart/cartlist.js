@@ -37,7 +37,11 @@ export default class CartList extends Component {
                         })
                     }
                     else {
-                        alert(responseJson.message)
+                        this.setState({
+                            data: [],
+                            cartLength: 0
+                        })
+                        // alert(responseJson.message)
                     }
                 })
             })
@@ -58,9 +62,11 @@ export default class CartList extends Component {
         .then((response) => {
             response.json()
             .then((responseJson) => {
-                alert(responseJson.message)
                 if(response.status === 202) {
                     this.getCartApi()
+                }
+                else {
+                    alert(responseJson.message)
                 }
             })
         })

@@ -78,12 +78,7 @@ export default class ProductDetails extends Component {
             .then((response) => {
                 response.json()
                 .then((responseJson) => {
-                    if(response.status === 201) {
-                        alert(responseJson.message)
-                    }
-                    else {
-                        alert(responseJson.message)
-                    }
+                    alert(responseJson.message)
                 })
             })
             .done();
