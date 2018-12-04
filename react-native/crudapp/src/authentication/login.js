@@ -67,7 +67,8 @@ export default class Login extends Component{
     render() {
         return(
             <Container>
-                <Content contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
+                <Content contentContainerStyle={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
+                    <Text style={{fontWeight: 'bold', fontSize: 25, marginBottom: 20}}>Product App</Text>
                     <Item rounded style={styles.inputcontainer} >
                         <Icon active name='ios-mail-outline' style={{color:"white"}} />
                         <Input

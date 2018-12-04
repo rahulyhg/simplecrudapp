@@ -133,7 +133,7 @@ export default class ProductDetails extends Component {
                 </Content>
                 <Footer style={{borderTopWidth: 0, backgroundColor: '#fff'}}>
                     <Button block info style={{width: width-20}} onPress={()=> this.addCartApi()}>
-                        <Text>Buy Now</Text>
+                        <Text style={{fontSize: 17}}>Buy Now</Text>
                     </Button>
                 </Footer>
             </Container>
