@@ -83,7 +83,7 @@ export default class ProductList extends Component {
                         renderItem={({ item }) => (
                             <Card style={styles.card}>
                                 <CardItem cardBody style= {{alignSelf:'center'}} button onPress={() => this.props.navigation.navigate('ProductDetails',{productId: item.id})}>
-                                    <Image source={{uri: 'http://10.111.240.96/simplecrudapp/product/images/iphonexsmax1.jpeg'}}
+                                    <Image source={{uri: `http://10.111.240.96/simplecrudapp/product/images/${item.image_filename}`}}
                                     style={{height: 150, width: 150, }}/>
                                 </CardItem>
                                 <CardItem>

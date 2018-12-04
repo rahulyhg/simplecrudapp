@@ -130,7 +130,7 @@ export default class CartList extends Component {
                                 <List>
                                     <ListItem thumbnail>
                                     <Left>
-                                        <Thumbnail square source={{ uri: 'https://placeimg.com/640/640/nature' }} />
+                                        <Thumbnail square source={{ uri:`http://10.111.240.96/simplecrudapp/product/images/${item.image_filename}`}} />
                                     </Left>
                                     <Body>
                                         <Text style={{fontSize: 15}}>{item.name}</Text>
