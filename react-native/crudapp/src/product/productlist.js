@@ -13,28 +13,28 @@ export default class ProductList extends Component {
             headerTitleStyle :{textAlign: 'center',alignSelf:'center'},
             headerRight: (
                 <TouchableOpacity onPress={() => {
-                    AsyncStorage.clear();
                     Alert.alert(
                         'Alert',
                         'Are you sure you want to log out?',
                         [
-                          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                          {text: 'OK', onPress: () => {
-                            navigation.getParam('handleUser')
-                            const resetAction = StackActions.reset({
-                                index: 0, // Reset nav stack
-                                key: null,
-                                actions: [
-                                    NavigationActions.navigate({
-                                        routeName: 'StackAuth', // Call home stack
-                                        action: NavigationActions.navigate({
-                                            routeName: 'Login',
+                            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                            {text: 'OK', onPress: () => {
+                                AsyncStorage.clear()
+                                navigation.getParam('handleUser')
+                                const resetAction = StackActions.reset({
+                                    index: 0, // Reset nav stack
+                                    key: null,
+                                    actions: [
+                                        NavigationActions.navigate({
+                                            routeName: 'StackAuth', // Call home stack
+                                            action: NavigationActions.navigate({
+                                                routeName: 'Login',
+                                            }),
                                         }),
-                                    }),
-                                ],
-                            })
-                            navigation.dispatch(resetAction)
-                          }},
+                                    ],
+                                })
+                                navigation.dispatch(resetAction)
+                            }},
                         ],
                         { cancelable: false }
                     )
